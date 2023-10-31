@@ -16,6 +16,8 @@ import java.util.List;
 public class Game {
     
     BoxStatus[] board = new BoxStatus[9];  // board contains 9 boxes
+
+
     
     /** Creates a new instance of game */
     public Game() {
@@ -71,5 +73,8 @@ public class Game {
         System.out.printf("| %c %c %c |\n", boxChar(4), boxChar(5), boxChar(6));
         System.out.printf("| %c %c %c |\n", boxChar(7), boxChar(8), boxChar(9));
     }
+
+
+    
     
 }
