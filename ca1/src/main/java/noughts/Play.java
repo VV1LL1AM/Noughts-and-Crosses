@@ -136,30 +136,35 @@ class Play{
                 determineWinner();
                 game.printBoard(); // print board
                 playerTurn(); // human turn
-                computerTurn(); // computer turn
+                
+                //computerTurn(); // computer turn
                 
             }
         }
 
 
 
-
-
-
-
           //PLAYER TURNS TO MOVE
     public void playerTurn()  {
+        Scanner scanner = new Scanner(System.in);
+        int square = 0;
 
-        // Player turn: just read in a square and claim it for human
-        System.out.print("Take a square (1-9): ");
-                // Reading data using readLine
-        int square = input.nextInt();
+        while (true) {
+            System.out.print("Take a square (1-9): ");
+
+            if (scanner.hasNextInt()) {
+                square = scanner.nextInt();
+                break; // Exit the loop when a valid integer is entered
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.next(); // Consume the invalid input
+            }
+        }  
         System.out.println(" ");
         
-        if (square >= 10 || square == 0) {
+        if (square >9 || square < 1) {
             System.out.println("INVALID MOVE, please select a number from 1 to 9");
-            game.printBoard();
-            playerTurn();
+            //game.printBoard();
 
         }
         if(containsNumber(MoveControl,square)){
@@ -171,23 +176,23 @@ class Play{
             MoveControl = removeFromArray(MoveControl,square);
             player_squares[countMovesP] = square;
             countMovesP++;
-            
+            computerTurn();
 
         }//else if(){}
         else{
             System.out.println("Please enter a valid move, position " + square + " is already taken");
-            game.printBoard();
-            playerTurn();
-            
-            
+            //game.printBoard();
+                 
         }
+
+        
         
     }
     
         //COMPUTER AI SECTION   
 
     public static List<Integer> findArrayIndexes(int digit) {
-        List<Integer> indexes = new ArrayList<>();
+        List<Integer> indexes = new ArrayList<>();   //@author: william  anbrosio%
         for (int i = 0; i < win_variations.length; i++) {
             for (int j = 0; j < win_variations[i].length; j++) {
                 if (win_variations[i][j] == digit) {
@@ -262,8 +267,6 @@ class Play{
     }
 
     
-
-
         //COMPUTERS TURNS TO MOVE
     public void computerTurn() {
 
@@ -288,11 +291,6 @@ class Play{
 
            // boolean checker = containsNumber(player_squares,findCommonNumber(blockage));
 
-            for (Map.Entry<Integer, Integer> entry : findblockage.entrySet()) {
-                int index = entry.getKey();
-                int count = entry.getValue();
-                System.out.println("Numbers found in variations[" + index + "]: " + count);
-            }
             if(value == 2 && findCommonNumber(blockage) != null) {
                 System.out.println("blockage: "+blockage);
                 System.out.println(IndexP);
@@ -322,11 +320,10 @@ class Play{
             computer_squares[countMovesC] = square;
             countMovesC++;
 
+            //playerTurn();
+
         }
         
-            
-
-
         
     }
 
@@ -367,11 +364,6 @@ class Play{
         }
 
         
-
-
-
-
-
     }
 
 
